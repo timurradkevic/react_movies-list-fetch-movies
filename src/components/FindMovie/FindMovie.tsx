@@ -7,10 +7,10 @@ import { Movie } from '../../types/Movie';
 import classNames from 'classnames';
 
 interface Props {
-  setMovies: (movie: Movie) => void;
+  onChangeMovies: (movie: Movie) => void;
 }
 
-export const FindMovie: React.FC<Props> = ({ setMovies }) => {
+export const FindMovie: React.FC<Props> = ({ onChangeMovies }) => {
   const [query, setQuery] = useState('');
   const [movie, setMovie] = useState<MovieData | null>(null);
   const [isError, setIsError] = useState(false);
@@ -59,7 +59,7 @@ export const FindMovie: React.FC<Props> = ({ setMovies }) => {
 
   const handleAddMovie = () => {
     setMovie(null);
-    setMovies(normalizeMovie(movie));
+    onChangeMovies(normalizeMovie(movie));
     setQuery('');
   };
 
@@ -77,9 +77,9 @@ export const FindMovie: React.FC<Props> = ({ setMovies }) => {
               type="text"
               id="movie-title"
               placeholder="Enter a title to search"
-              className={`input ${classNames({
+              className={classNames('input', {
                 'is-danger': isError,
-              })}`}
+              })}
               value={query}
               onChange={event => {
                 setIsError(false);
@@ -100,9 +100,9 @@ export const FindMovie: React.FC<Props> = ({ setMovies }) => {
             <button
               data-cy="searchButton"
               type="submit"
-              className={`button is-light ${classNames({
+              className={classNames('button is-light', {
                 'is-loading': isLoading,
-              })}`}
+              })}
               disabled={query.trim() === '' ? true : false}
               onClick={handleFindMovie}
             >

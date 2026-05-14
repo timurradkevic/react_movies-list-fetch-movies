@@ -22,7 +22,7 @@ export const App = () => {
       </div>
 
       <div className="sidebar">
-        <FindMovie setMovies={addMovies} />
+        <FindMovie onChangeMovies={addMovies} />
       </div>
     </div>
   );
